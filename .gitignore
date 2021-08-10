@@ -15,3 +15,4 @@ _pycache_
 
 # Distribution / packaging
 .Python
+/tests/.pytest_cache/
