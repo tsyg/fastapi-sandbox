@@ -13,9 +13,7 @@ pipeline {
         stage("test") {
             steps {
                 sh """
-                        cd app
-			behave
-			cd ..
+		    docker run fastapi_test:latest behave
                 """
             }
         }
