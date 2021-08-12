@@ -1,6 +1,7 @@
 pipeline {
     agent any
     stages {
+
         stage("build") {
             steps {
                 sh """
@@ -8,6 +9,17 @@ pipeline {
                 """
             }
         }
+
+        stage("test") {
+            steps {
+                sh """
+                        cd app
+			behave
+			cd ..
+                """
+            }
+        }
+
         stage("run") {
             steps {
                 sh """
@@ -15,6 +27,9 @@ pipeline {
                 """
             }
         }
+
+
+
     }
 }
 
