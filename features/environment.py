@@ -2,7 +2,7 @@ import os
 from glob import glob
 
 from behave import fixture, use_fixture
-from fastapi.testclient import TestClient
+from requests_toolbelt.sessions import BaseUrlSession
 
 import app
 
@@ -18,7 +18,7 @@ def data_dir(context, *args, **kwargs):
 @fixture
 def fastapi_client(context, *args, **kwargs):
     app.DATA_DIR = context.data_dir
-    context.client = TestClient(app.app)
+    context.client = BaseUrlSession(base_url="http://localhost:8082")
     yield context.client
 
 
