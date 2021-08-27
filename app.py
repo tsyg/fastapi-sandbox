@@ -11,6 +11,9 @@ DATA_DIR = "data"
 
 @app.get("/users")
 def users():
+    """
+    HERE MAY BE THE VERY DETAILED DESCRIPTION - Enjoy !
+    """
     return {
         "success": True,
         "data": get_users()
@@ -33,8 +36,12 @@ def get_users():
 
 
 def get_user_by_id(user_id):
-    with open(f"{DATA_DIR}/user{user_id}.json") as f:
-        return json.load(f)
+    try:
+        with open(f"{DATA_DIR}/user{user_id}.json") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        from fastapi import HTTPException
+        raise HTTPException(404, f"USER NOT FOUND: {user_id}")
 
 
 # run app
